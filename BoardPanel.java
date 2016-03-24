@@ -29,7 +29,7 @@ public class BoardPanel extends JPanel
 	 */
 	public BoardPanel() {
 		        contentPane = new JPanel();
-		        contentPane.setBorder(new EmptyBorder(20, 20, 5, 5));
+		        //contentPane.setBorder(new EmptyBorder(20, 20, 5, 5));
 				contentPane.setLayout(new BorderLayout());
 				//add(contentPane, BorderLayout.CENTER);
 				setMaximumSize(new Dimension(Integer.MAX_VALUE,Integer.MIN_VALUE)); // to set the max size not sure how if works tho 	
@@ -46,14 +46,14 @@ public class BoardPanel extends JPanel
 		for (int row = 0; row < MAXROW; row++)
 			for (int col = 0; col < MAXCOL; col++)
 				array[row][col] = BLANK;
-		gameStart = false;
+		//gameStart = false;
 	}
     /**
      * Override Paint method 
      * @param g
      */
-	public void paint(Graphics g) {
-        g.setColor(Color.YELLOW);
+	public void paintComponent(Graphics g) {
+        g.setColor(Color.CYAN);
        
 		g.fillRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 		for (int row = 0; row < MAXROW; row++)
