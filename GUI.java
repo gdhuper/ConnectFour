@@ -23,18 +23,8 @@ import javax.swing.border.EmptyBorder;
 public class GUI extends JFrame implements ActionListener{
 
 	//private static final Graphics Graphics = null;
-	private JPanel contentPane;
 	private MenuItem newGame, closeGame, abt;
-	int[][] array;
-	
-	boolean gameStart;
-	
-
-	public static final int MAXROW = 6; 
-	public static final int MAXCOL = 6;  
-	public static final int BLANK = 0;
-	public static final int RED = 1;
-	public static final int YELLOW = 2;
+	BoardPanel panel = new BoardPanel();
 
 	/**
 	 * Launch the application.
@@ -87,11 +77,12 @@ public class GUI extends JFrame implements ActionListener{
 	    this.setVisible(true);
 	    
 		
-	   // contentPane = new JPanel();
+	   //contentPane = new JPanel();
 	    Font myFont = new Font("Sans-Serif", Font.BOLD, 100);
 	    JLabel label = new JLabel("Connect Four!");
 	    label.setFont(myFont);
 	    label.setOpaque(true);
+	    
 	   
 	    
 	  
@@ -104,36 +95,18 @@ public class GUI extends JFrame implements ActionListener{
 		//getContentPane().setForeground(Color.BLUE);
 		//getContentPane().setBackground(Color.BLUE);
 		
-	initialize();
-	setSize(1024, 768);
-		
+	    BoardPanel p = new BoardPanel();
+	    p.setIgnoreRepaint(true);
+	    p.setPreferredSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+	     add(p, BorderLayout.CENTER);
+	    pack();
+	
+	    setSize(1024, 768);
+
 		
 	}
 	
-     public void initialize() {
-		array = new int[MAXROW][MAXCOL];
-		for (int row = 0; row < MAXROW; row++)
-			for (int col = 0; col < MAXCOL; col++)
-				array[row][col] = BLANK;
-		gameStart = false;
-	}
-
-	public void paint(Graphics g) {
-        g.setColor(Color.RED);
-       
-		g.fillRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-		for (int row = 0; row < MAXROW; row++)
-			for (int col = 0; col < MAXCOL; col++) {
-			//	    g.setColor(Color.YELLOW);
-				//if (array[row][col] == BLANK)
-				//	g.setColor(Color.WHITE);
-				//if (array[row][col] == RED)
-			//		g.setColor(Color.RED);
-				//if (array[row][col] == YELLOW)
-				//	g.setColor(Color.YELLOW);
-				g.fillOval(160 + 100 * col, 100 + 100 * row, 100, 100);
-			}
-			} 
+     
 	
 
 	@Override
