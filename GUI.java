@@ -24,17 +24,21 @@ public class GUI extends JFrame implements ActionListener{
 
 	//private static final Graphics Graphics = null;
 	private MenuItem newGame, closeGame, abt;
-	BoardPanel panel = new BoardPanel();
-
+	BoardPanel p = new BoardPanel();
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		
+		BoardPanel.MAXCOL = Integer.parseInt(args[0]);
+		
+		
 		
 	    EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+
 					GUI frame = new GUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);  // to center the frame
@@ -76,7 +80,7 @@ public class GUI extends JFrame implements ActionListener{
 	    setMenuBar(menuBar);
 	    this.setVisible(true);
 	    
-		
+	    
 	   //contentPane = new JPanel();
 	    Font myFont = new Font("Sans-Serif", Font.BOLD, 100);
 	    JLabel label = new JLabel("Connect Four!");
@@ -95,7 +99,8 @@ public class GUI extends JFrame implements ActionListener{
 		//getContentPane().setForeground(Color.BLUE);
 		//getContentPane().setBackground(Color.BLUE);
 		
-	    BoardPanel p = new BoardPanel();
+	   // BoardPanel p = new BoardPanel();
+	    //BoardPanel p = new BoardPanel(6, 7);
 	    p.setIgnoreRepaint(true);
 	    p.setPreferredSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 	     add(p, BorderLayout.CENTER);

@@ -17,8 +17,8 @@ public class BoardPanel extends JPanel
 	boolean gameStart;
 	
 
-	public static final int MAXROW = 6; 
-	public static final int MAXCOL = 6;  
+	public static  int MAXROW = 9; 
+	public static  int MAXCOL = MAXROW;  
 	public static final int BLANK = 0;
 	public static final int RED = 1;
 	public static final int YELLOW = 2;
