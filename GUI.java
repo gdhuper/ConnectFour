@@ -8,6 +8,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +25,17 @@ public class GUI extends JFrame implements ActionListener{
 
 	//private static final Graphics Graphics = null;
 	private JPanel contentPane;
-	private JMenuItem newGame, closeGame, abt;
+	private MenuItem newGame, closeGame, abt;
+	int[][] array;
+	
+	boolean gameStart;
+	
+
+	public static final int MAXROW = 6; 
+	public static final int MAXCOL = 7;  
+	public static final int BLANK = 0;
+	public static final int RED = 1;
+	public static final int YELLOW = 2;
 
 	/**
 	 * Launch the application.
@@ -53,46 +66,71 @@ public class GUI extends JFrame implements ActionListener{
 		setBounds(200, 200, 800, 600);
 		setTitle("Connect Four!");
 		
-		JMenuBar menuBar = new JMenuBar(); //For the menu on top 
+		MenuBar menuBar = new MenuBar(); //For the menu on top 
 		
-		JMenu fileMenu = new JMenu("File");
+		Menu fileMenu = new Menu("File");
 		
-	    newGame = fileMenu.add("New Game");
+	    newGame = new MenuItem("New Game");
 	    newGame.addActionListener(this);
-	    closeGame = fileMenu.add("Quit");
+	    fileMenu.add(newGame);
+	    closeGame = new MenuItem("Quit");
 	    closeGame.addActionListener(this);
-	    JMenu aboutMenu = new JMenu("About");
-        abt = aboutMenu.add("About Game");
+	    fileMenu.add(closeGame);
+	    Menu aboutMenu = new Menu("About");
+        abt = new MenuItem("About Game");
         abt.addActionListener(this);
+        aboutMenu.add(abt);
 	   //JMenuItem closeItem = fileMenu.add("Close");
 	    fileMenu.addSeparator();
 	    menuBar.add(fileMenu); 
 	    menuBar.add(aboutMenu);
-	    setJMenuBar(menuBar);
+	    setMenuBar(menuBar);
+	    this.setVisible(true);
+	    
 		
-	   contentPane = new JPanel();
-	   // contentPane.setForeground(Color.cyan); // does nothing for right now 
-	   Font myFont = new Font("Sans-Serif", Font.BOLD, 100);
-	   JLabel label = new JLabel("Connect Four!");
-	   label.setFont(myFont);
+	    contentPane = new JPanel();
+	    Font myFont = new Font("Sans-Serif", Font.BOLD, 100);
+	    JLabel label = new JLabel("Connect Four!");
+	    label.setFont(myFont);
+	   
+	   
 	  
 		contentPane.setBorder(new EmptyBorder(20, 20, 5, 5));
 		contentPane.setLayout(new GridLayout(1, 1));
 		contentPane.setMaximumSize(new Dimension(Integer.MAX_VALUE,Integer.MIN_VALUE)); // to set the max size not sure how if works tho 	
-
+		
 		setContentPane(contentPane);
 		getContentPane().setBackground(Color.YELLOW);
 		
+	initialize();
+	setSize(1024, 768);
 		
 		
 	}
 	
-	/**public void drawBoard()
-	{
-		Graphics.draw3DRect(10, 12, 23, 32, true);
-	
-	}*/
-	
+	public void initialize() {
+		array = new int[MAXROW][MAXCOL];
+		for (int row = 0; row < MAXROW; row++)
+			for (int col = 0; col < MAXCOL; col++)
+				array[row][col] = BLANK;
+		gameStart = false;
+	} // initialize
+
+	public void paint(Graphics g) {
+
+		g.fillRect(110, 50, 100 + 100 * MAXCOL, 100 + 100 * MAXROW);
+		for (int row = 0; row < MAXROW; row++)
+			for (int col = 0; col < MAXCOL; col++) {
+				g.setColor(Color.YELLOW);
+				if (array[row][col] == BLANK)
+					g.setColor(Color.WHITE);
+				if (array[row][col] == RED)
+					g.setColor(Color.RED);
+				if (array[row][col] == YELLOW)
+					g.setColor(Color.YELLOW);
+				g.fillOval(160 + 100 * col, 100 + 100 * row, 100, 100);
+			}
+			} 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
