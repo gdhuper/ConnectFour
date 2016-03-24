@@ -1,7 +1,6 @@
  package CS151.HW3;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -32,7 +31,7 @@ public class GUI extends JFrame implements ActionListener{
 	
 
 	public static final int MAXROW = 6; 
-	public static final int MAXCOL = 7;  
+	public static final int MAXCOL = 6;  
 	public static final int BLANK = 0;
 	public static final int RED = 1;
 	public static final int YELLOW = 2;
@@ -88,19 +87,22 @@ public class GUI extends JFrame implements ActionListener{
 	    this.setVisible(true);
 	    
 		
-	    contentPane = new JPanel();
+	   // contentPane = new JPanel();
 	    Font myFont = new Font("Sans-Serif", Font.BOLD, 100);
 	    JLabel label = new JLabel("Connect Four!");
 	    label.setFont(myFont);
+	    label.setOpaque(true);
 	   
-	   
+	    
 	  
-		contentPane.setBorder(new EmptyBorder(20, 20, 5, 5));
-		contentPane.setLayout(new GridLayout(1, 1));
-		contentPane.setMaximumSize(new Dimension(Integer.MAX_VALUE,Integer.MIN_VALUE)); // to set the max size not sure how if works tho 	
+		//contentPane.setBorder(new EmptyBorder(20, 20, 5, 5));
+		//contentPane.setLayout(new BorderLayout(1, 1));
+		//add(contentPane, BorderLayout.CENTER);
+		//.setMaximumSize(new Dimension(Integer.MAX_VALUE,Integer.MIN_VALUE)); // to set the max size not sure how if works tho 	
 		
-		setContentPane(contentPane);
-		getContentPane().setBackground(Color.YELLOW);
+		//setContentPane(contentPane);
+		//getContentPane().setForeground(Color.BLUE);
+		//getContentPane().setBackground(Color.BLUE);
 		
 	initialize();
 	setSize(1024, 768);
@@ -108,29 +110,31 @@ public class GUI extends JFrame implements ActionListener{
 		
 	}
 	
-	public void initialize() {
+     public void initialize() {
 		array = new int[MAXROW][MAXCOL];
 		for (int row = 0; row < MAXROW; row++)
 			for (int col = 0; col < MAXCOL; col++)
 				array[row][col] = BLANK;
 		gameStart = false;
-	} // initialize
+	}
 
 	public void paint(Graphics g) {
-
-		g.fillRect(110, 50, 100 + 100 * MAXCOL, 100 + 100 * MAXROW);
+        g.setColor(Color.RED);
+       
+		g.fillRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 		for (int row = 0; row < MAXROW; row++)
 			for (int col = 0; col < MAXCOL; col++) {
-				g.setColor(Color.YELLOW);
-				if (array[row][col] == BLANK)
-					g.setColor(Color.WHITE);
-				if (array[row][col] == RED)
-					g.setColor(Color.RED);
-				if (array[row][col] == YELLOW)
-					g.setColor(Color.YELLOW);
+			//	    g.setColor(Color.YELLOW);
+				//if (array[row][col] == BLANK)
+				//	g.setColor(Color.WHITE);
+				//if (array[row][col] == RED)
+			//		g.setColor(Color.RED);
+				//if (array[row][col] == YELLOW)
+				//	g.setColor(Color.YELLOW);
 				g.fillOval(160 + 100 * col, 100 + 100 * row, 100, 100);
 			}
 			} 
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
