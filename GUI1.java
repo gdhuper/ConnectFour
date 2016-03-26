@@ -101,10 +101,10 @@ public class GUI1 extends JFrame implements MouseListener, ActionListener{
 		// BoardPanel p = new BoardPanel();
 		// BoardPanel p = new BoardPanel(6, 7);
 		 JPanel j = (JPanel) super.getContentPane();
-			j.setLayout(new GridLayout(BoardPanel.MAXROW, BoardPanel.MAXCOL));
+			j.setLayout(new GridLayout(BoardPanel1.MAXROW, BoardPanel1.MAXCOL));
 			//array = new int[MAXROW][MAXCOL];
 			//colNum = new int[MAXCOL];
-			for (int row = 0; row <  BoardPanel.MAXROW; row++){
+			for (int row = 0; row <  BoardPanel1.MAXROW; row++){
 				for (int col = 0; col < BoardPanel.MAXCOL; col++){
 					BoardPanel1 panel = new BoardPanel1(col, row);
 					//j.addMouseListener((MouseListener) this);
@@ -164,11 +164,28 @@ public class GUI1 extends JFrame implements MouseListener, ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getComponent() instanceof GUI1) {
+			BoardPanel1  c  = (BoardPanel1) e.getComponent();
+
+			if(c.checkColumn(c.getCols()))
+			{
+				JOptionPane.showMessageDialog(this,
+						"Occupied! Choose another column.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				super.repaint();
+				
+			}
+			else
+			{
+				c.putDisk(c.getCols());
+				
+			}
+		}
 		
+
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
