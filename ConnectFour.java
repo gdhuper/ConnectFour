@@ -18,8 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -28,42 +26,45 @@ public class ConnectFour extends JFrame implements MouseListener, ActionListener
 
 	private JPanel panel_Center;
 	protected JPanel[][] buttonsBoard;
-	public static int boardSize = 7;
-	public static int [][] chess;
+	private static int boardSize = 7;
+	private static int winSequence = 4;
+	protected int [][] board;
 	//private static final Graphics Graphics = null;
 	private MenuItem newGame, closeGame, abt;
 	private int player = 0;
 	
 	/**
 	 * Launch the application.
-	 * @throws MalformedURLException 
 	 */
-	public static void main(String[] args) throws MalformedURLException 
+	public static void main(String[] args) 
 	{
-		//boardSize = Integer.parseInt(args[0]);
-		new ConnectFour();
+		//int size = Integer.parseInt(args[0]);
+		//if(size > 50)
+		//{
+			
+		//JOptionPane.showMessageDialog(null, "Sorry! Please select a size under 50");
+	//	}
+		//int winS = Integer.parseInt(args[1]);
+		//if(winS > size)
+		//{
+		//JOptionPane.showMessageDialog(null, "Sorry! Winning sequence should be less than board size");
+		//}
+		
+		//new ConnectFour(Integer.parseInt(args[0]));
+	
+		new ConnectFour(boardSize, winSequence );
 	}
 
-	public ConnectFour() throws MalformedURLException
+	public ConnectFour(int boardSize, int winSequence)
 	{
+		this.boardSize = boardSize;
+		this.winSequence = winSequence;
 	     showFrame();
-	     JOptionPane.showMessageDialog(null,"Welcome to Connect 4");
-	    // JOptionPane.showMessageDialog(this, "Welcome to Connect Four!", "Duh", JOptionPane.INFORMATION_MESSAGE);
+	     //JOptionPane.showMessageDialog(null,"Welcome to Connect 4");
 	}
 
-public void showFrame() throws MalformedURLException
+public void showFrame()
 {
-	JWindow window = new JWindow();
-	window.getContentPane().add(
-	    new JLabel("", new ImageIcon(new URL("http://docs.oracle.com/javase/tutorial/uiswing/examples/misc/SplashDemoProject/src/misc/images/splash.gif")), SwingConstants.CENTER));
-	window.setSize(boardSize*100, boardSize*100);
-	window.setVisible(true);
-	try {
-	    Thread.sleep(5000);
-	} catch (InterruptedException e) {
-	    e.printStackTrace();
-	}
-	window.setVisible(false);
      setTitle("Connect 4");
      setSize( boardSize*100,boardSize*100);
      super.setLocationRelativeTo(null);
@@ -95,25 +96,24 @@ public void showFrame() throws MalformedURLException
     panel_Center=new JPanel();  //show the board
     panel_Center.setLayout(new GridLayout(boardSize,boardSize,10,10));
     panel_Center.setBackground(Color.YELLOW);
-    buttonsBoard=new JPanel[boardSize][boardSize];
-    chess=new int[boardSize][boardSize];
+    buttonsBoard =new JPanel[boardSize][boardSize];
+    board=new int[boardSize][boardSize];
         
      for (int r=0; r<boardSize;r++)
      {
     	for (int c=0;c<boardSize;c++)
             {
                 buttonsBoard[r][c]=new JPanel();
-               buttonsBoard[r][c].setBackground(Color.GRAY);
+               buttonsBoard[r][c].setBackground(Color.BLACK);
                
                 panel_Center.add(buttonsBoard[r][c]);
-                chess[r][c] = 0;
+                board[r][c] = 0;
                 
                 buttonsBoard[r][c].putClientProperty("row", r);
                 buttonsBoard[r][c].putClientProperty("col", c);
                 
                 buttonsBoard[r][c].addMouseListener(this);
-                //buttonsBoard[r][c].addActionListener(new mybuttonsBoard());//add actionListener
-                chess[r][c]=0;	
+                board[r][c]=0;	
             }
          }
 
@@ -123,141 +123,260 @@ public void showFrame() throws MalformedURLException
 	}
 
 	
-	public void mousePressed(MouseEvent e)
-	{
-		
-	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
 		JPanel panel = (JPanel) e.getSource();
-		int 
-		row = (Integer)panel.getClientProperty("row");
+		int row = (Integer)panel.getClientProperty("row");
 		int col =  (Integer)panel.getClientProperty("col");
 		Component[] components = panel.getParent().getComponents();
 		for(int i=boardSize-1; i>=0; i-- ) {
-			if(chess[i][col] == 0) {
+			if(board[i][col] == 0) {
 				if(player == 0 || player == 1) {
-					chess[i][col] = 1;
+					board[i][col] = 1;
 					for(Component component: components) {
 						JPanel jPanel = (JPanel)component;
 						if((Integer)jPanel.getClientProperty("row") == i && (Integer)jPanel.getClientProperty("col") == col ) {
 							jPanel.setBackground(Color.RED);
 							player=2;
-							int w = getWinner();
-							if(w != 0)
-							{
-								if(w == player)
-								{
-									JOptionPane.showMessageDialog(this, "Red Wins");
-								}
-								
-							}
+							checkWinner();
 							break;
 						}
 					}
 					player=2;
 					break;
 				} else {
-					chess[i][col] = 2;
+					board[i][col] = 2;
 					for(Component component: components) {
 						JPanel jPanel = (JPanel)component;
 						if((Integer)jPanel.getClientProperty("row") == i && (Integer)jPanel.getClientProperty("col") == col ) {
 							jPanel.setBackground(Color.BLUE);
 							player=1;
-							int w = getWinner();
-							if(w != 0)
-							{
-								if(w == player)
-								{
-									JOptionPane.showMessageDialog(this, "Blue Wins");
-								}
-								
-							}
+							checkWinner();
 							break;
 						}
 					}
 					
 					player=1;
-					int w = getWinner();
-					if(w != 0)
-					{
-						if(w == player)
-						{
-							JOptionPane.showMessageDialog(this, "Red Wins");
-						}
-						
-					}
-					
 					break;
 				}
 			}
 		}
+		
 	}
-			
-			public int getWinner() {
-				// check 4 colors in a row
-				for (int row = 0; row < boardSize; row++) {
-					for (int col = 0; col < boardSize - 3; col++) {
-						if (chess[row][col] != 0
-								&& chess[row][col] == chess[row][col + 1]
-										
-								&& chess[row][col]== chess[row][col + 2]
-										
-								&& chess[row][col] == chess[row][col + 3]
-										) {
-							return chess[row][col];
-						}
-					}
-				}
+	
+	
+	public boolean checkWinner()
+	{
 
-				// check 4 colors in a column
-				for (int row = 0; row < boardSize - 3; row++) {
-					for (int col = 0; col < boardSize; col++) {
-						if (chess[row][col] == chess[row + 1][col]
-								
-								&& chess[row][col] == chess[row + 2][col]
-										
-								&& chess[row][col] == chess[row + 3][col]
-										
-								&& chess[row][col] != 0) {
-							return chess[row][col];
-						}
-					}
-				}
+		   boolean hasAWinner=false;
 
-				// check for 4 colors diagonally
-				for (int row = 0; row < boardSize - 3; row++) {
-					for (int col = 0; col < boardSize - 3; col++) {
-						if (chess[row][col] == chess[row + 1][col + 1]
-								
-								&& chess[row][col] == chess[row + 2][col + 2]
-										
-								&& chess[row][col] == chess[row + 3][col + 3]
-										
-								&& chess[row][col] != 0) {
-							return chess[row][col];
-						}
-					}
-				}
-				// check for 4 colors diagonally
-				for (int row = 3; row < boardSize; row++) {
-					for (int col = 0; col < boardSize - 3; col++) {
-						if (chess[row][col] == chess[row - 1][col + 1]
-								
-								&& chess[row][col] == chess[row - 2][col + 2]
-										
-								&& chess[row][col] == chess[row - 3][col + 3]
-										
-								&& chess[row][col] != 0) {
-							return chess[row][col];
-						}
-					}
-				}
+		  //win at row
+		  for (int r=0;r<boardSize;r++)
+		   {
+		        for(int c=0;(c+(winSequence-1))<boardSize;c++)
+		             {
+		                if(board[r][c]==board[r][c+1]&&
+		                      board[r][c]==board[r][c+2]&&
+		                      board[r][c]==board[r][c+3]&&
+		                      board[r][c]==1)
+		                        {
+		                         JOptionPane.showMessageDialog(null,player+" is a winner.");
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                         
+		                         hasAWinner=true;
+		                         return hasAWinner;
 
-				return 0;
+		                    }
+
+		                 else if(board[r][c]==board[r][c+1]&&
+		                            board[r][c]==board[r][c+2]&&
+		                            board[r][c]==board[r][c+3]&&
+		                            board[r][c]==2)
+		                      {
+		                         JOptionPane.showMessageDialog(null,player+ " is a winner.");
+		                      
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                         
+		                         hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		        }
+
+		  }
+
+		 //win at column
+
+		 for (int r=0;(r+(winSequence - 1))<boardSize;r++)
+		    {
+		         for(int c=0;c<boardSize;c++)
+		              {
+		                 if(board[r][c]==board[r+1][c]&&
+		                       board[r][c]==board[r+2][c]&&
+		                       board[r][c]==board[r+3][c]&&
+		                       board[r][c]==1)
+		                         {
+		                         JOptionPane.showMessageDialog(null, player+" is a winner.");
+		                        int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+		                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                         
+		                         hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		                  else if(board[r][c]==board[r+1][c]&&
+		                             board[r][c]==board[r+2][c]&&
+		                             board[r][c]==board[r+3][c]&&
+		                             board[r][c]==2)
+		                       {
+		                         JOptionPane.showMessageDialog(null,player+" is a winner.");
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                        hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		         }
+
+		  }
+		//win at upleft-to-downright direction
+		for (int r=0;(r+(winSequence - 1))<boardSize;r++)
+		    {
+		         for(int c=0;(c+(winSequence - 1))<boardSize;c++)
+		              {
+		                 if(board[r][c]==board[r+1][c+1]&&
+		                       board[r][c]==board[r+2][c+2]&&
+		                       board[r][c]==board[r+3][c+3]&&
+		                       board[r][c]==1)
+		                         {
+		                         JOptionPane.showMessageDialog(null, player+" is a winner.");
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                         hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		                  else if(board[r][c]==board[r+1][c+1]&&
+		                             board[r][c]==board[r+2][c+2]&&
+		                             board[r][c]==board[r+3][c+3]&&
+		                             board[r][c]==2)
+		                       {
+		                         JOptionPane.showMessageDialog(null,player+" is a winner.");
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                        hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		         }
+
+		  }
+		//win at downleft-to-upright direction
+		for (int r=boardSize - 1;(r-(winSequence - 1))>=0;r--)
+		    {
+		         for(int c=0;(c+(winSequence - 1))<boardSize;c++)
+		              {
+		                 if(board[r][c]==board[r-1][c+1]&&
+		                       board[r][c]==board[r-2][c+2]&&
+		                       board[r][c]==board[r-3][c+3]&&
+		                       board[r][c]==1)
+		                         {
+		                         JOptionPane.showMessageDialog(null, player+" is a winner.");
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                         hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		                  else if(board[r][c]==board[r-1][c+1]&&
+		                             board[r][c]==board[r-2][c+2]&&
+		                             board[r][c]==board[r-3][c+3]&&
+		                             board[r][c]==2)
+		                       {
+		                         JOptionPane.showMessageDialog(null,player+" is a winner.");
+		                         int d =  JOptionPane.showConfirmDialog(null, "Do you wish to replay game?", "Play Again!", JOptionPane.YES_NO_OPTION);
+			                        
+		                         if(d == JOptionPane.YES_OPTION)
+		                        	 {
+		                        		 reset();
+		                        	 }
+		                         else{
+		                        	 System.exit(0);
+		                         }
+		                        hasAWinner=true;
+		                         return hasAWinner;
+		                    }
+		         }
+
+		  }
+
+		return hasAWinner;
+
+		}//end hasAwinner
+	
+
+	
+	
+	
+	
+	private void reset() {
+		for(int i = 0; i < boardSize; i++)
+		{
+			for(int j = 0; j < boardSize; j++)
+			{
+				this.board[i][j] = 0;
 			}
+		}
+		new ConnectFour(boardSize,winSequence );
+		
+	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) 
@@ -278,15 +397,15 @@ public void showFrame() throws MalformedURLException
 	}
 
 	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame)
 		{
-			for (int row = 0; row < boardSize; row++) {
-				for (int col = 0; col < boardSize; col++) {
-					chess[row][col] = 0;
-				}
-			}
-			super.repaint();
+			//reset();
 		}
 		else if (e.getSource() == abt)
 		{
