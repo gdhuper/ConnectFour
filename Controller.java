@@ -26,8 +26,8 @@ public class Controller {
 			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
 				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
-					if (g.getChess(r,c) == g.getChess(r, c + j) &&
-					g.getChess(r, c) == 1)
+					if (g.getBoard(r,c) == g.getBoard(r, c + j) &&
+					g.getBoard(r, c) == 1)
 					{
 						counter++;
 						continue;
@@ -53,8 +53,8 @@ public class Controller {
 
 				for (int j = 0; j < g.getBoardSize(); j++) 
 				{
-					if (g.getChess(r, c) == g.getChess(r, c + j) &&
-					g.getChess(r, c) == 2) {
+					if (g.getBoard(r, c) == g.getBoard(r, c + j) &&
+					g.getBoard(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -82,8 +82,8 @@ public class Controller {
 			for (int c = 0; c < g.getBoardSize(); c++) {
 				for (int j = 0; j < g.getWinSequence(); j++) 										
 				{
-					if (g.getChess(r, c) == g.getChess(r + j, c) &&
-					g.getChess(r, c) == 1) {
+					if (g.getBoard(r, c) == g.getBoard(r + j, c) &&
+					g.getBoard(r, c) == 1) {
 						counter++;
 						continue;
 					} else {
@@ -106,9 +106,9 @@ public class Controller {
 				}
 				for (int j = 0; j < g.getWinSequence(); j++) 										
 				{
-					if (g.getChess(r, c) == g.getChess(r + j, c) &&
+					if (g.getBoard(r, c) == g.getBoard(r + j, c) &&
 
-					g.getChess(r, c) == 2) {
+					g.getBoard(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -137,8 +137,8 @@ public class Controller {
 			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
 				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
-					if (g.getChess(r, c) == g.getChess(r + j, c + j) &&
-							g.getChess(r, c) == 1) {
+					if (g.getBoard(r, c) == g.getBoard(r + j, c + j) &&
+							g.getBoard(r, c) == 1) {
 						counter++;
 						continue;
 					} else {
@@ -163,9 +163,9 @@ public class Controller {
 
 				for (int j = 0; j < g.getWinSequence(); j++)
 				{
-					if (g.getChess(r, c) == g.getChess(r + j, c + j) &&
+					if (g.getBoard(r, c) == g.getBoard(r + j, c + j) &&
 
-							g.getChess(r, c) == 2) {
+							g.getBoard(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -197,8 +197,8 @@ public class Controller {
 			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
 				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
-					if (g.getChess(r, c) == g.getChess(r - j, c + j)
-							&& g.getChess(r, c) == 1)
+					if (g.getBoard(r, c) == g.getBoard(r - j, c + j)
+							&& g.getBoard(r, c) == 1)
 					{
 						counter++;
 						continue;
@@ -224,9 +224,9 @@ public class Controller {
 
 				for (int j = 0; j < g.getWinSequence(); j++)
 				{
-					if (g.getChess(r, c) == g.getChess(r - j, c + j) &&
+					if (g.getBoard(r, c) == g.getBoard(r - j, c + j) &&
 
-							g.getChess(r, c) == 2) {
+							g.getBoard(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -263,7 +263,7 @@ public class Controller {
 		
 		for (int i = 0; i < g.getBoardSize(); i++) {
 			for (int j = 0; j < g.getBoardSize(); j++) {
-				g.setChess(i, j, 0);
+				g.setBoard(i, j, 0);
 			}
 		}
 		new Controller(g.getBoardSize(),g.getWinSequence() );
@@ -276,7 +276,7 @@ public class Controller {
 		int counter = 0;
 		for (int i = 0; i < g.getBoardSize(); i++) {
 			for (int j = 0; j < g.getBoardSize(); j++) {
-				if(g.getChess(i, j) != 0)
+				if(g.getBoard(i, j) != 0)
 				{
 					counter++;
 				}
