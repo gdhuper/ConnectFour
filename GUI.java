@@ -24,14 +24,46 @@ import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame implements MouseListener, ActionListener {
 
-	static JPanel panel_Center;
+	private JPanel panel_Center;
 	protected JPanel[][] buttonsBoard;
-	static int boardSize;
-	static int winSequence;
-	static int[][] chess;
+	private int boardSize;
+	private int winSequence;
+	private int[][] chess;
 	// private static final Graphics Graphics = null;
 	private MenuItem newGame, closeGame, abt;
-	static int player = 0;
+	private int player = 0;
+
+	public int getBoardSize() {
+		return boardSize;
+	}
+
+	public void setBoardSize(int boardSize) {
+		this.boardSize = boardSize;
+	} 
+
+	public JPanel getPanel_Center() {
+		return panel_Center;
+	}
+
+	public void setPanel_Center(JPanel panel_Center) {
+		this.panel_Center = panel_Center;
+	}
+
+	public int getWinSequence() {
+		return winSequence;
+	}
+
+	public void setWinSequence(int winSequence) {
+		this.winSequence = winSequence;
+	}
+
+	public int getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(int player) {
+		this.player = player;
+	}
 
 	/**
 	 * Launch the application.
@@ -97,6 +129,11 @@ public class GUI extends JFrame implements MouseListener, ActionListener {
 		panel_Center.repaint();
 		setVisible(true);
 	}
+	
+	public void checkWinner()
+	{
+		Controller.checkWinner();
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -113,7 +150,8 @@ public class GUI extends JFrame implements MouseListener, ActionListener {
 						if ((Integer) jPanel.getClientProperty("row") == i
 								&& (Integer) jPanel.getClientProperty("col") == col) {
 							jPanel.setBackground(Color.RED);
-							Controller.checkWinner();
+							
+							checkWinner();
 							// player=2;
 							break;
 						}
@@ -127,7 +165,7 @@ public class GUI extends JFrame implements MouseListener, ActionListener {
 						if ((Integer) jPanel.getClientProperty("row") == i
 								&& (Integer) jPanel.getClientProperty("col") == col) {
 							jPanel.setBackground(Color.BLUE);
-							Controller.checkWinner();
+							checkWinner();
 							// player=1;
 							break;
 						}
@@ -139,6 +177,14 @@ public class GUI extends JFrame implements MouseListener, ActionListener {
 			}
 		}
 
+	}
+
+	public int getChess(int a, int b) {
+		return chess[a][b];
+	}
+
+	public void setChess(int a, int b, int zero) {
+		this.chess[a][b] = zero;
 	}
 
 	@Override

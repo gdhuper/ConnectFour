@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Controller extends JPanel {
+	
+	public static GUI g = null;
 
 	public static void main(String[] args) {
 		// int size = Integer.parseInt(args[0]);
@@ -31,23 +33,25 @@ public class Controller extends JPanel {
 
 	public Controller(int arg1, int arg2) {
 
-		new GUI(arg1, arg2);
+		
+		g = new GUI(arg1, arg2);
+		g.showFrame();      //Added an object to call GUI's methods
 
 	}
 
-	public static void checkWinner() {
+	public  static void checkWinner() {
 
 		// win at row
 		int counter = 0;
-		for (int r = 0; r < GUI.boardSize; r++) //
+		for (int r = 0; r < g.getBoardSize(); r++) //
 		{
-			for (int c = 0; (c + (GUI.winSequence - 1)) < GUI.boardSize; c++) {
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r][c + j] &&
+					if (g.getChess(r,c) == g.getChess(r, c + j) &&
 
-					GUI.chess[r][c] == 1)
+					g.getChess(r, c) == 1)
 
 					{
 						counter++;
@@ -59,8 +63,8 @@ public class Controller extends JPanel {
 					}
 
 				}
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -75,12 +79,11 @@ public class Controller extends JPanel {
 
 				}
 
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+				for (int j = 0; j < g.getBoardSize(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r][c + j] &&
-
-					GUI.chess[r][c] == 2) {
+					if (g.getChess(r, c) == g.getChess(r, c + j) &&
+					g.getChess(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -88,8 +91,8 @@ public class Controller extends JPanel {
 						break;
 					}
 				}
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int q = JOptionPane.showConfirmDialog(null,
@@ -108,14 +111,14 @@ public class Controller extends JPanel {
 
 		// win at column
 
-		for (int r = 0; (r + (GUI.winSequence - 1)) < GUI.boardSize; r++) {
-			for (int c = 0; c < GUI.boardSize; c++) {
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+		for (int r = 0; (r + (g.getWinSequence() - 1)) < g.getBoardSize(); r++) {
+			for (int c = 0; c < g.getBoardSize(); c++) {
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r + j][c] &&
+					if (g.getChess(r, c) == g.getChess(r + j, c) &&
 
-					GUI.chess[r][c] == 1) {
+					g.getChess(r, c) == 1) {
 						counter++;
 						continue;
 					} else {
@@ -123,8 +126,8 @@ public class Controller extends JPanel {
 						break;
 					}
 				}
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -138,12 +141,12 @@ public class Controller extends JPanel {
 					}
 				}
 
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r + j][c] &&
+					if (g.getChess(r, c) == g.getChess(r + j, c) &&
 
-					GUI.chess[r][c] == 2) {
+					g.getChess(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -151,8 +154,8 @@ public class Controller extends JPanel {
 						break;
 					}
 				}
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int e = JOptionPane.showConfirmDialog(null,
@@ -170,14 +173,14 @@ public class Controller extends JPanel {
 		}
 
 		// win at upleft-to-downright direction
-		for (int r = 0; (r + (GUI.winSequence - 1)) < GUI.boardSize; r++) {
-			for (int c = 0; (c + (GUI.winSequence - 1)) < GUI.boardSize; c++) {
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+		for (int r = 0; (r + (g.getWinSequence() - 1)) < g.getBoardSize(); r++) {
+			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r + j][c + j] &&
+					if (g.getChess(r, c) == g.getChess(r + j, c + j) &&
 
-					GUI.chess[r][c] == 1) {
+							g.getChess(r, c) == 1) {
 						counter++;
 						continue;
 					} else {
@@ -185,8 +188,8 @@ public class Controller extends JPanel {
 						break;
 					}
 				}
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -200,12 +203,12 @@ public class Controller extends JPanel {
 					}
 				}
 
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r + j][c + j] &&
+					if (g.getChess(r, c) == g.getChess(r + j, c + j) &&
 
-					GUI.chess[r][c] == 2) {
+							g.getChess(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -214,8 +217,8 @@ public class Controller extends JPanel {
 					}
 				}
 
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int f = JOptionPane.showConfirmDialog(null,
@@ -234,13 +237,13 @@ public class Controller extends JPanel {
 		}
 
 		// win at downleft-to-upright direction
-		for (int r = GUI.boardSize - 1; (r - (GUI.winSequence - 1)) >= 0; r--) {
-			for (int c = 0; (c + (GUI.winSequence - 1)) < GUI.boardSize; c++) {
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+		for (int r = g.getBoardSize() - 1; (r - (g.getWinSequence() - 1)) >= 0; r--) {
+			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r - j][c + j]
-							&& GUI.chess[r][c] == 1)
+					if (g.getChess(r, c) == g.getChess(r - j, c + j)
+							&& g.getChess(r, c) == 1)
 
 					{
 						counter++;
@@ -250,8 +253,8 @@ public class Controller extends JPanel {
 						break;
 					}
 				}
-				if (counter == GUI.winSequence) {
-					JOptionPane.showMessageDialog(null, GUI.player
+				if (counter == g.getWinSequence()) {
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -265,12 +268,12 @@ public class Controller extends JPanel {
 					}
 				}
 
-				for (int j = 0; j < GUI.winSequence; j++) // for how many boxes
+				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
 															// to check around
 				{
-					if (GUI.chess[r][c] == GUI.chess[r - j][c + j] &&
+					if (g.getChess(r, c) == g.getChess(r - j, c + j) &&
 
-					GUI.chess[r][c] == 2) {
+							g.getChess(r, c) == 2) {
 						counter++;
 						continue;
 					} else {
@@ -278,16 +281,16 @@ public class Controller extends JPanel {
 						break;
 					}
 				}
-				if (counter == GUI.winSequence) {
+				if (counter == g.getWinSequence()) {
 
-					JOptionPane.showMessageDialog(null, GUI.player
+					JOptionPane.showMessageDialog(null, g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
-					int g = JOptionPane.showConfirmDialog(null,
+					int h = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 
-					if (g == JOptionPane.YES_OPTION) {
+					if (h == JOptionPane.YES_OPTION) {
 						reset();
 					} else {
 						System.exit(0);
@@ -300,31 +303,31 @@ public class Controller extends JPanel {
 
 	// end hasAwinner
 	public static void reset() {
-		Component[] components = GUI.panel_Center.getComponents();
+		Component[] components = g.getPanel_Center().getComponents();
 		for (Component component : components) {
 			JPanel j = (JPanel) component;
 			j.setBackground(Color.BLACK);
 		}
-		for (int i = 0; i < GUI.boardSize; i++) {
-			for (int j = 0; j < GUI.boardSize; j++) {
-				GUI.chess[i][j] = 0;
+		for (int i = 0; i < g.getBoardSize(); i++) {
+			for (int j = 0; j < g.getBoardSize(); j++) {
+				g.setChess(i, j, 0);
 			}
 		}
 
-		GUI.player = 2;
+		g.setPlayer(1);
 	}
 
-	public static void isTie() {
+	public  void isTie() {
 		int counter = 0;
-		for (int i = 0; i < GUI.boardSize; i++) {
-			for (int j = 0; j < GUI.boardSize; j++) {
-				if(GUI.chess[i][j] != 0)
+		for (int i = 0; i < g.getBoardSize(); i++) {
+			for (int j = 0; j < g.getBoardSize(); j++) {
+				if(g.getChess(i, j) != 0)
 				{
 					counter++;
 				}
 			}
 		}
-		if(counter == GUI.boardSize*(GUI.boardSize))
+		if(counter == g.getBoardSize()*(g.getBoardSize()))
 		{
 			int g = JOptionPane.showConfirmDialog(null, "Tie game", "Play again?", JOptionPane.YES_NO_OPTION);
 			if (g == JOptionPane.YES_OPTION) {
