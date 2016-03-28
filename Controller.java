@@ -6,30 +6,11 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Controller extends JPanel {
+public class Controller {
 	
 	public static GUI g = null;
 
-	public static void main(String[] args) {
-		// int size = Integer.parseInt(args[0]);
-		// if(size > 50)
-		// {
-
-		// JOptionPane.showMessageDialog(null,
-		// "Sorry! Please select a size under 50");
-		// }
-		// int winS = Integer.parseInt(args[1]);
-		// if(winS > size)
-		// {
-		// JOptionPane.showMessageDialog(null,
-		// "Sorry! Winning sequence should be less than board size");
-		// }
-
-		// new ConnectFour(Integer.parseInt(args[0]));
-
-		new Controller(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-
-	}
+	
 
 	public Controller(int arg1, int arg2) {
 
@@ -303,18 +284,14 @@ public class Controller extends JPanel {
 
 	// end hasAwinner
 	public static void reset() {
-		Component[] components = g.getPanel_Center().getComponents();
-		for (Component component : components) {
-			JPanel j = (JPanel) component;
-			j.setBackground(Color.BLACK);
-		}
+		
 		for (int i = 0; i < g.getBoardSize(); i++) {
 			for (int j = 0; j < g.getBoardSize(); j++) {
 				g.setChess(i, j, 0);
 			}
 		}
 
-		g.setPlayer(1);
+		new Controller(g.getBoardSize(), g.getWinSequence());
 	}
 
 	public  void isTie() {
