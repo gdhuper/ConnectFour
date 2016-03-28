@@ -1,67 +1,57 @@
 package CS151.HW3;
 
-import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class Controller {
 	
-	public static GUI g = null;
-
-	
-
+	public static Connect4 g = null;
+    /**
+     * Contructor for controller class to initialize GUI for game
+     * @param arg1 the board size
+     * @param arg2 the winning sequence
+     */
 	public Controller(int arg1, int arg2) {
-
-		
-		g = new GUI(arg1, arg2);
-		g.showFrame();      //Added an object to call GUI's methods
-
+		g = new Connect4(arg1, arg2);
+		g.showFrame();  
 	}
-
+	
+	
+	/**
+	 * Method to check the winner
+	 */
 	public  static void checkWinner() {
-
-		// win at row
 		int counter = 0;
-		for (int r = 0; r < g.getBoardSize(); r++) //
+		for (int r = 0; r < g.getBoardSize(); r++)
 		{
 			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
 					if (g.getChess(r,c) == g.getChess(r, c + j) &&
-
 					g.getChess(r, c) == 1)
-
 					{
 						counter++;
 						continue;
-
-					} else {
+					} 
+					else {
 						counter = 0;
 						break;
 					}
-
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
-
 					if (d == JOptionPane.YES_OPTION) {
 						reset();
 					} else {
 						System.exit(0);
 					}
-
 				}
 
-				for (int j = 0; j < g.getBoardSize(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getBoardSize(); j++) 
 				{
 					if (g.getChess(r, c) == g.getChess(r, c + j) &&
 					g.getChess(r, c) == 2) {
@@ -73,32 +63,26 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null, "Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int q = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
-
 					if (q == JOptionPane.YES_OPTION) {
 						reset();
 					} else {
 						System.exit(0);
 					}
-
 				}
 			}
 		}
 
-		// win at column
-
 		for (int r = 0; (r + (g.getWinSequence() - 1)) < g.getBoardSize(); r++) {
 			for (int c = 0; c < g.getBoardSize(); c++) {
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++) 										
 				{
 					if (g.getChess(r, c) == g.getChess(r + j, c) &&
-
 					g.getChess(r, c) == 1) {
 						counter++;
 						continue;
@@ -108,22 +92,19 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
-
 					if (d == JOptionPane.YES_OPTION) {
 						reset();
 					} else {
 						System.exit(0);
 					}
 				}
-
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++) 										
 				{
 					if (g.getChess(r, c) == g.getChess(r + j, c) &&
 
@@ -136,7 +117,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player" +"Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int e = JOptionPane.showConfirmDialog(null,
@@ -148,19 +129,15 @@ public class Controller {
 					} else {
 						System.exit(0);
 					}
-
 				}
 			}
 		}
 
-		// win at upleft-to-downright direction
 		for (int r = 0; (r + (g.getWinSequence() - 1)) < g.getBoardSize(); r++) {
 			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
 					if (g.getChess(r, c) == g.getChess(r + j, c + j) &&
-
 							g.getChess(r, c) == 1) {
 						counter++;
 						continue;
@@ -170,7 +147,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null, "Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -184,8 +161,7 @@ public class Controller {
 					}
 				}
 
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++)
 				{
 					if (g.getChess(r, c) == g.getChess(r + j, c + j) &&
 
@@ -199,7 +175,7 @@ public class Controller {
 				}
 
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int f = JOptionPane.showConfirmDialog(null,
@@ -217,15 +193,12 @@ public class Controller {
 			}
 		}
 
-		// win at downleft-to-upright direction
 		for (int r = g.getBoardSize() - 1; (r - (g.getWinSequence() - 1)) >= 0; r--) {
 			for (int c = 0; (c + (g.getWinSequence() - 1)) < g.getBoardSize(); c++) {
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
 					if (g.getChess(r, c) == g.getChess(r - j, c + j)
 							&& g.getChess(r, c) == 1)
-
 					{
 						counter++;
 						continue;
@@ -235,7 +208,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -249,8 +222,7 @@ public class Controller {
 					}
 				}
 
-				for (int j = 0; j < g.getWinSequence(); j++) // for how many boxes
-															// to check around
+				for (int j = 0; j < g.getWinSequence(); j++)
 				{
 					if (g.getChess(r, c) == g.getChess(r - j, c + j) &&
 
@@ -264,7 +236,7 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 
-					JOptionPane.showMessageDialog(null, g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int h = JOptionPane.showConfirmDialog(null,
@@ -282,19 +254,25 @@ public class Controller {
 		}
 	}
 
-	// end hasAwinner
+	/**
+	 * Resets the board when called. 
+	 * Resets the board panels to default
+	 */
 	public static void reset() {
+		
 		
 		for (int i = 0; i < g.getBoardSize(); i++) {
 			for (int j = 0; j < g.getBoardSize(); j++) {
 				g.setChess(i, j, 0);
 			}
 		}
-
-		new Controller(g.getBoardSize(), g.getWinSequence());
-	}
-
-	public  void isTie() {
+		new Controller(g.getBoardSize(),g.getWinSequence() );
+		}
+    /**
+     * Helper method to check if there is a tie between two players
+     * resets the board if there is a tie between players
+     */
+	public static  void isTie() {
 		int counter = 0;
 		for (int i = 0; i < g.getBoardSize(); i++) {
 			for (int j = 0; j < g.getBoardSize(); j++) {
@@ -306,7 +284,7 @@ public class Controller {
 		}
 		if(counter == g.getBoardSize()*(g.getBoardSize()))
 		{
-			int g = JOptionPane.showConfirmDialog(null, "Tie game", "Play again?", JOptionPane.YES_NO_OPTION);
+			int g = JOptionPane.showConfirmDialog(null, "Tie game, " + "Play again?", "Quit" ,JOptionPane.YES_NO_OPTION);
 			if (g == JOptionPane.YES_OPTION) {
 				reset();
 			} else {
