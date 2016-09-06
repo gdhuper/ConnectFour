@@ -51,7 +51,7 @@ public class Controller {
 					}
 				}
 
-				for (int j = 0; j < g.getBoardSize(); j++) 
+				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
 					if (g.getBoard(r, c) == g.getBoard(r, c + j) &&
 					g.getBoard(r, c) == 2) {

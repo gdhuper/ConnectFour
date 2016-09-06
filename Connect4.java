@@ -41,7 +41,7 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 		this.boardSize = boardSize;
 		this.winSequence = winSequence;
 		showFrame();
-		JOptionPane.showMessageDialog(null, "Welcome to Connect 4: " +
+		JOptionPane.showMessageDialog(null, "Welcome to Connect Four! \n" +
 				 "Player 1 is Red and Player 2 is Blue");
 		JOptionPane.showMessageDialog(null, "Player 1, You may begin");
 	}
