@@ -5,11 +5,15 @@ import javax.swing.JOptionPane;
 
 public class PlayGame {
 	
-	/**
+	
 	Controller c = null;
+	static JOptionPane pane = new JOptionPane();
 
 	public static void main(String[] args) {
-		 int size = Integer.parseInt(args[0]);
+		
+		String s = pane.showInputDialog("Please enter the size of board between 5-50");
+		 
+		int size = Integer.parseInt(s);
 		 if(size > 50)
 		 {
 
@@ -22,8 +26,8 @@ public class PlayGame {
 		     JOptionPane.showMessageDialog(null,
 			 "Sorry! Please select a size greater than 0");
 			 }
-		 
-		 int winS = Integer.parseInt(args[1]);
+		 String w = pane.showInputDialog("Please enter winning sequence number");
+		 int winS = Integer.parseInt(w);
 		 
 		 if(winS > size)
 		 {
@@ -34,11 +38,6 @@ public class PlayGame {
 		 
 		new Controller(size, winS);
 
-	}*/
-	
-	public static void main(String[] args)
-	{
-		new Controller(5, 3);
 	}
 	
 

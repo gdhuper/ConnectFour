@@ -12,7 +12,7 @@ public class Controller {
      */
 	public Controller(int arg1, int arg2) {
 		g = new Connect4(arg1, arg2);
-		g.showFrame();  
+		
 	}
 	
 	
@@ -38,7 +38,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -63,7 +63,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, "Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null, "Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int q = JOptionPane.showConfirmDialog(null,
@@ -92,7 +92,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -117,7 +117,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null,"Player" +"Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int e = JOptionPane.showConfirmDialog(null,
@@ -147,7 +147,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null, "Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null, "Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -175,7 +175,7 @@ public class Controller {
 				}
 
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int f = JOptionPane.showConfirmDialog(null,
@@ -208,7 +208,7 @@ public class Controller {
 					}
 				}
 				if (counter == g.getWinSequence()) {
-					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int d = JOptionPane.showConfirmDialog(null,
@@ -236,7 +236,7 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 
-					JOptionPane.showMessageDialog(null,"Player" + g.getPlayer()
+					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
 					int h = JOptionPane.showConfirmDialog(null,
@@ -259,14 +259,7 @@ public class Controller {
 	 * Resets the board panels to default
 	 */
 	public static void reset() {
-		
-		
-		for (int i = 0; i < g.getBoardSize(); i++) {
-			for (int j = 0; j < g.getBoardSize(); j++) {
-				g.setBoard(i, j, 0);
-			}
-		}
-		new Controller(g.getBoardSize(),g.getWinSequence() );
+		g.reset();
 		}
     /**
      * Helper method to check if there is a tie between two players

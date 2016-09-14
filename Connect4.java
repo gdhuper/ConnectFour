@@ -42,8 +42,8 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 		this.winSequence = winSequence;
 		showFrame();
 		JOptionPane.showMessageDialog(null, "Welcome to Connect Four! \n" +
-				 "Player 1 is Red and Player 2 is Blue");
-		JOptionPane.showMessageDialog(null, "Player 1, You may begin");
+				 "Player 1 is Red and Player 2 is Blue \n" + "Player 1, You may begin");
+		//JOptionPane.showMessageDialog(null, "Player 1, You may begin");
 	}
    /**
     * Displays the Frame of the Game
@@ -83,21 +83,39 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 			for (int c = 0; c < boardSize; c++) {
 				buttonsBoard[r][c] = new JPanel();
 				buttonsBoard[r][c].setBackground(Color.BLACK);
-
-				panel_Center.add(buttonsBoard[r][c]);
-				board[r][c] = 0;
-
 				buttonsBoard[r][c].putClientProperty("row", r);
 				buttonsBoard[r][c].putClientProperty("col", c);
 
 				buttonsBoard[r][c].addMouseListener(this);
+				panel_Center.add(buttonsBoard[r][c]);
 				board[r][c] = 0;
+
+				
+			
 			}
 		}
 
 		add(panel_Center, BorderLayout.CENTER);
-		panel_Center.repaint();
+		//panel_Center.repaint();
 		setVisible(true);
+	}
+	
+	
+	/**
+	 * Resets the board if player choose to replay
+	 * @throws InterruptedException 
+	 */
+	public void reset()
+	{
+		for (int r = 0; r < boardSize; r++) {
+			for (int c = 0; c < boardSize; c++) {	
+				this.board[r][c] = 0;
+			}
+		}
+		this.player = 0;
+		panel_Center.repaint();
+
+	
 	}
 	
 	
@@ -234,6 +252,10 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 	public void setBoardSize(int boardSize) {
 		this.boardSize = boardSize;
 	} 
+	
+	
+	
+	
    /**
     * Return the panel center component
     * @return the panel center component
