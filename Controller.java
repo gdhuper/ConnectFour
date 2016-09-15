@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 public class Controller {
 	
 	public static Connect4 g = null;
+	public static boolean winA = false;
+	public static boolean winB = false;
     /**
      * Contructor for controller class to initialize GUI for game
      * @param arg1 the board size
@@ -12,7 +14,6 @@ public class Controller {
      */
 	public Controller(int arg1, int arg2) {
 		g = new Connect4(arg1, arg2);
-		
 	}
 	
 	
@@ -41,6 +42,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+				
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -49,7 +51,9 @@ public class Controller {
 					} else {
 						System.exit(0);
 					}
+					
 				}
+			   
 
 				for (int j = 0; j < g.getWinSequence(); j++) 
 				{
@@ -66,6 +70,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null, "Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+					
 					int q = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -75,6 +80,7 @@ public class Controller {
 						System.exit(0);
 					}
 				}
+				
 			}
 		}
 
@@ -95,6 +101,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+					
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -104,6 +111,7 @@ public class Controller {
 						System.exit(0);
 					}
 				}
+				
 				for (int j = 0; j < g.getWinSequence(); j++) 										
 				{
 					if (g.getBoard(r, c) == g.getBoard(r + j, c) &&
@@ -120,6 +128,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+					
 					int e = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -130,6 +139,7 @@ public class Controller {
 						System.exit(0);
 					}
 				}
+			
 			}
 		}
 
@@ -150,6 +160,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null, "Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+					
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -160,6 +171,7 @@ public class Controller {
 						System.exit(0);
 					}
 				}
+			   
 
 				for (int j = 0; j < g.getWinSequence(); j++)
 				{
@@ -178,6 +190,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+					
 					int f = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -189,7 +202,7 @@ public class Controller {
 					}
 
 				}
-
+			   
 			}
 		}
 
@@ -211,6 +224,7 @@ public class Controller {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
 							+ " is a winner.");
 					counter = 0;
+					
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
@@ -221,6 +235,7 @@ public class Controller {
 						System.exit(0);
 					}
 				}
+				
 
 				for (int j = 0; j < g.getWinSequence(); j++)
 				{

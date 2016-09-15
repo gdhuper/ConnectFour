@@ -96,27 +96,11 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 		}
 
 		add(panel_Center, BorderLayout.CENTER);
-		//panel_Center.repaint();
+		panel_Center.repaint();
+	
 		setVisible(true);
 	}
 	
-	
-	/**
-	 * Resets the board if player choose to replay
-	 * @throws InterruptedException 
-	 */
-	public void reset()
-	{
-		for (int r = 0; r < boardSize; r++) {
-			for (int c = 0; c < boardSize; c++) {	
-				this.board[r][c] = 0;
-			}
-		}
-		this.player = 0;
-		panel_Center.repaint();
-
-	
-	}
 	
 	
 	/**
@@ -131,7 +115,26 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 		Component[] components = panel.getParent().getComponents();
 		for (int i = boardSize - 1; i >= 0; i--) {
 			if (board[i][col] == 0) {
-				if (player == 0 || player == 1) {
+				
+				if (player == 0) {
+					board[i][col] = 1;
+					for (Component component : components) {
+						JPanel jPanel = (JPanel) component;
+						if ((Integer) jPanel.getClientProperty("row") == i
+								&& (Integer) jPanel.getClientProperty("col") == col) {
+							jPanel.setBackground(Color.RED);
+							this.player = 2;
+							System.out.println("next player = " + this.player);
+
+							break;
+							
+						}
+					}
+					break;
+				}
+				
+				
+				if (player == 1) {
 					board[i][col] = 1;
 					for (Component component : components) {
 						JPanel jPanel = (JPanel) component;
@@ -140,12 +143,17 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 							jPanel.setBackground(Color.RED);
 							isTie();
 							checkWinner();
+							System.out.println("next player = " + this.player);
 							break;
+							
 						}
 					}
-					player = 2;
+					
+					
 					break;
-				} else {
+				} 
+				
+				 if(player == 2) {
 					board[i][col] = 2;
 					for (Component component : components) {
 						JPanel jPanel = (JPanel) component;
@@ -154,17 +162,67 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 							jPanel.setBackground(Color.BLUE);
 							isTie();
 							checkWinner();
+							System.out.println("next player = " + this.player);
+
 							break;
 						}
 					}
-
-					player = 1;
+					
 					break;
 				}
 			}
 		}
 
 	}
+	
+	
+	public void switchPlayer()
+	{
+		if(this.player == 1 && Controller.winA == true)
+		{
+			this.player = 1;
+		}
+		if(this.player == 1 && Controller.winA == false && Controller.winB == false)
+		{
+			this.player = 2;
+		}
+		if(this.player == 2 && Controller.winB ==true)
+		{
+			this.player = 2;
+		}
+		if(this.player == 2 && Controller.winB == false && Controller.winA == false)
+		{
+			this.player = 1;
+		}
+		
+	}
+	
+	
+	/**
+	 * Resets the board if player choose to replay
+	 * @throws InterruptedException 
+	 */
+	public void reset()
+	{
+		for (int r = 0; r < this.getBoardSize(); r++) {
+			for (int c = 0; c < this.getBoardSize(); c++) {
+				buttonsBoard[r][c].setBackground(Color.BLACK);
+				this.board[r][c] = 0;
+			}
+		}
+
+		panel_Center.repaint();
+		
+		
+		
+
+	
+	}
+	
+	
+	
+	
+	
      /**
       * Returns the Board at index[a][b]
       * @param a row index
