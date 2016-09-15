@@ -40,14 +40,15 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (RED) wins.");
 					counter = 0;
-				
+					winA = true;
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 					if (d == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -68,14 +69,15 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null, "Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (BLUE) wins.");
 					counter = 0;
-					
+					winB = true;
 					int q = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 					if (q == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -99,14 +101,15 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (RED) wins.");
 					counter = 0;
-					
+					winA = true;
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 					if (d == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -126,15 +129,16 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (BLUE) wins.");
 					counter = 0;
-					
+					winB = true;
 					int e = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 
 					if (e == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -158,15 +162,16 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null, "Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (RED) wins.");
 					counter = 0;
-					
+					winA = true;
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 
 					if (d == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -188,15 +193,16 @@ public class Controller {
 
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (BLUE) wins.");
 					counter = 0;
-					
+					winB = true;
 					int f = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 
 					if (f == JOptionPane.YES_OPTION) {
 						reset();
+					
 					} else {
 						System.exit(0);
 					}
@@ -222,15 +228,16 @@ public class Controller {
 				}
 				if (counter == g.getWinSequence()) {
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (RED) wins.");
 					counter = 0;
-					
+					winA = true;
 					int d = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 
 					if (d == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -252,14 +259,16 @@ public class Controller {
 				if (counter == g.getWinSequence()) {
 
 					JOptionPane.showMessageDialog(null,"Player " + g.getPlayer()
-							+ " is a winner.");
+							+ " (BLUE) wins.");
 					counter = 0;
+					winB = true;
 					int h = JOptionPane.showConfirmDialog(null,
 							"Do you wish to replay game?", "Play Again!",
 							JOptionPane.YES_NO_OPTION);
 
 					if (h == JOptionPane.YES_OPTION) {
 						reset();
+						
 					} else {
 						System.exit(0);
 					}
@@ -275,6 +284,10 @@ public class Controller {
 	 */
 	public static void reset() {
 		g.reset();
+		g.switchPlayer();
+		
+
+		
 		}
     /**
      * Helper method to check if there is a tie between two players

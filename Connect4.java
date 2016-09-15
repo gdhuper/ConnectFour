@@ -124,8 +124,8 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 								&& (Integer) jPanel.getClientProperty("col") == col) {
 							jPanel.setBackground(Color.RED);
 							this.player = 2;
-							System.out.println("next player = " + this.player);
-
+							System.out.println("A " + Controller.winA);
+							System.out.println("B " + Controller.winB);
 							break;
 							
 						}
@@ -143,7 +143,17 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 							jPanel.setBackground(Color.RED);
 							isTie();
 							checkWinner();
-							System.out.println("next player = " + this.player);
+							if(Controller.winA == true)
+							{
+								this.player = 1;
+								Controller.winA = false;
+							}
+							else if(Controller.winB == false)
+							{
+								this.player = 2;
+							}
+							System.out.println("A " + Controller.winA);
+							System.out.println("B " + Controller.winB);
 							break;
 							
 						}
@@ -162,7 +172,18 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 							jPanel.setBackground(Color.BLUE);
 							isTie();
 							checkWinner();
-							System.out.println("next player = " + this.player);
+							if(Controller.winB == true)
+							{
+								Controller.winB = false;
+								this.player = 2;
+								
+							}
+							else if(Controller.winB == false)
+							{
+								this.player = 1;
+							}
+							System.out.println("A " +Controller.winA);
+							System.out.println("B " + Controller.winB);
 
 							break;
 						}
@@ -178,22 +199,16 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 	
 	public void switchPlayer()
 	{
-		if(this.player == 1 && Controller.winA == true)
+		if(this.getPlayer() == 1 && Controller.winA == true)
 		{
 			this.player = 1;
 		}
-		if(this.player == 1 && Controller.winA == false && Controller.winB == false)
+		
+		if(this.getPlayer() == 2 && Controller.winB ==true)
 		{
 			this.player = 2;
 		}
-		if(this.player == 2 && Controller.winB ==true)
-		{
-			this.player = 2;
-		}
-		if(this.player == 2 && Controller.winB == false && Controller.winA == false)
-		{
-			this.player = 1;
-		}
+		
 		
 	}
 	
