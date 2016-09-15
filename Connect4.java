@@ -124,8 +124,7 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 								&& (Integer) jPanel.getClientProperty("col") == col) {
 							jPanel.setBackground(Color.RED);
 							this.player = 2;
-							System.out.println("A " + Controller.winA);
-							System.out.println("B " + Controller.winB);
+							
 							break;
 							
 						}
@@ -152,8 +151,7 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 							{
 								this.player = 2;
 							}
-							System.out.println("A " + Controller.winA);
-							System.out.println("B " + Controller.winB);
+						
 							break;
 							
 						}
@@ -182,8 +180,7 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 							{
 								this.player = 1;
 							}
-							System.out.println("A " +Controller.winA);
-							System.out.println("B " + Controller.winB);
+							
 
 							break;
 						}
