@@ -58,7 +58,6 @@ public class PlayGame {
 		  winS = Integer.parseInt(w);
 		  if(winS <= size)
 		  {
-		 // winS = Integer.parseInt(w);
 		  v1 = true;
 		  }
 		 
