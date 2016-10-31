@@ -1,6 +1,6 @@
 # ConnectFour
 
-Play Game:
+To Play Game:
 
 1. Download Connect-Four.jar file
 2. Lauch the jar file by double clicking or through command line using: java -jar Connect-Four.jar
