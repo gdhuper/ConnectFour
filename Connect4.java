@@ -110,7 +110,6 @@ public class Connect4 extends JFrame implements MouseListener, ActionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JPanel panel = (JPanel) e.getSource();
-		//int row = (Integer) panel.getClientProperty("row");
 		int col = (Integer) panel.getClientProperty("col");
 		Component[] components = panel.getParent().getComponents();
 		for (int i = boardSize - 1; i >= 0; i--) {
